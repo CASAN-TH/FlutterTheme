@@ -1,12 +1,7 @@
 import 'package:FkutterTestapp/coomponents/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:FkutterTestapp/components/rounded_button.dart';
-import 'package:FkutterTestapp/screens/Welcome/welcome_screen.dart';
-import 'package:FkutterTestapp/screens/frist/frist_screen.dart';
 import 'package:FkutterTestapp/styles.dart';
-import 'package:FkutterTestapp/components/already_have_an_account_acheck.dart';
-import 'package:FkutterTestapp/Screens/Signup/signup_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   @override
