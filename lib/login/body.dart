@@ -10,6 +10,7 @@ import 'package:FkutterTestapp/coomponents/rounded_button.dart';
 import 'package:FkutterTestapp/coomponents/rounded_input_field.dart';
 import 'package:FkutterTestapp/coomponents/rounded_password_field.dart';
 import 'package:FkutterTestapp/login/background.dart';
+import 'package:FkutterTestapp/onboard/onboard_screen.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_auth/Screens/Login/components/background.dart';
 // import 'package:flutter_auth/Screens/Signup/signup_screen.dart';
@@ -60,7 +61,7 @@ class Body extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return BoardingTest();
+                      return OnboardingScreen();
                     },
                   ),
                 );
