@@ -22,7 +22,7 @@ class Body extends StatelessWidget {
             ),
             SizedBox(height: size.height * 0.05),
             SvgPicture.asset(
-              "assets/icons/welcome-new.svg",
+              "assets/icons/undraw_welcome_cats_thqn.svg",
               height: size.height * 0.45,
             ),
             SizedBox(height: size.height * 0.05),

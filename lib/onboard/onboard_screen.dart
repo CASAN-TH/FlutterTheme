@@ -186,7 +186,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ),
                             SizedBox(height: 30.0),
                             RoundedButton(
-                              text: "LOGIN",
+                              text: "เริ่มต้น",
+                              textColor: Colors.black,
                               press: () {
                                 Navigator.push(
                                   context,
