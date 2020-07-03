@@ -3,6 +3,8 @@ import 'package:FkutterTestapp/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:FkutterTestapp/styles.dart';
+import 'package:flutter_line_sdk/flutter_line_sdk.dart';
+import 'package:FkutterTestapp/onboard/profile.dart';
 
 class OnboardingScreen extends StatefulWidget {
   @override
@@ -33,6 +35,46 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
     );
+  }
+
+  void login() async {
+    try {
+      final result = await LineSDK.instance.login();
+      print(result.toString());
+      var accesstoken = await getAccessToken();
+      var displayname = result.userProfile.displayName;
+      var statusmessage = result.userProfile.statusMessage;
+      var imgUrl = result.userProfile.pictureUrl;
+      var userId = result.userProfile.userId;
+
+      print("AccessToken> " + accesstoken);
+      print("DisplayName> " + displayname);
+      print("StatusMessage> " + statusmessage);
+      print("ProfileURL> " + imgUrl);
+      print("userId> " + userId);
+
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ProfilePage(
+                    puserId: userId,
+                    paccessToken: accesstoken,
+                    pdisplayName: displayname,
+                    pimgUrl: imgUrl,
+                    pstatusMessage: statusmessage,
+                  )));
+    } on PlatformException catch (e) {
+      print(e);
+    }
+  }
+
+  Future getAccessToken() async {
+    try {
+      final result = await LineSDK.instance.currentAccessToken;
+      return result.value;
+    } on PlatformException catch (e) {
+      print(e.message);
+    }
   }
 
   @override
@@ -185,19 +227,59 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               style: kSubtitleStyle,
                             ),
                             SizedBox(height: 30.0),
-                            RoundedButton(
-                              text: "เริ่มต้น",
-                              textColor: Colors.black,
-                              press: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                      return WelcomeScreen();
-                                    },
+                            Padding(
+                              padding: const EdgeInsets.only(top: 15),
+                              child: Row(children: <Widget>[
+                                Expanded(
+                                  child: Container(
+                                    margin: const EdgeInsets.only(
+                                        top: 0,
+                                        bottom: 10,
+                                        right: 10,
+                                        left: 10),
+                                    child: RaisedButton(
+                                      color: Color.fromRGBO(0, 185, 0, 1),
+                                      textColor: Colors.white,
+                                      padding: const EdgeInsets.all(1),
+                                      child: Column(
+                                        children: <Widget>[
+                                          Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: <Widget>[
+                                                Image.network(
+                                                  'https://firebasestorage.googleapis.com/v0/b/messagingapitutorial.appspot.com/o/line_logo.png?alt=media&token=80b41ee6-9d77-45da-9744-2033e15f52b2',
+                                                  width: 50,
+                                                  height: 50,
+                                                ),
+                                                Container(
+                                                  color: Colors.black12,
+                                                  width: 2,
+                                                  height: 40,
+                                                ),
+                                                Expanded(
+                                                  child: Center(
+                                                      child: Text(
+                                                          "เข้าสู่ระบบด้วย LINE",
+                                                          style: TextStyle(
+                                                              fontSize: 17,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold))),
+                                                )
+                                              ])
+                                        ],
+                                      ),
+                                      onPressed: () {
+                                        login();
+                                      },
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
                                   ),
-                                );
-                              },
+                                ),
+                              ]),
                             ),
                           ],
                         ),

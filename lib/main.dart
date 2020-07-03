@@ -1,7 +1,12 @@
 import 'package:FkutterTestapp/onboard/onboard_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_line_sdk/flutter_line_sdk.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  LineSDK.instance.setup("1654317683").then((_) {
+    print("LineSDK Prepared");
+  });
   runApp(MyApp());
 }
 
